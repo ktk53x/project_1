@@ -1,0 +1,18 @@
+{% extends 'crawler/base.html' %}
+
+{% block content %}
+<div class="container card" id="questions-attempts">
+    <h3>Questions And Attempts</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <div>
+        {% for problem, no_of_attempts in attempts.items %}
+        <pre><b>PROBLEM</b> = {{ problem }}     <b>NO OF ATTEMPTS</b> =  {{ no_of_attempts }}</pre>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

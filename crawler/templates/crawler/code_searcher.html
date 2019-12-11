@@ -1,0 +1,20 @@
+{% extends 'crawler/base.html' %}
+
+{% block content %}
+<div class="container card" id="code-search">
+    <h3>Code Searcher</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <div id="code-output">
+        <code>
+        {% for strings in code_text %}
+            <pre>{{ strings }}</pre>
+            {% endfor %}
+        </code>
+    </div>
+</div>
+{% endblock %}

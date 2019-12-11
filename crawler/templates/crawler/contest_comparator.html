@@ -1,0 +1,16 @@
+{% extends 'crawler/base.html' %}
+
+{% block content %}
+<div class="container card" id="contest-comparator">
+    <h3>Contest Comparator</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <div>
+        {{ problems }}
+    </div>
+</div>
+{% endblock %}

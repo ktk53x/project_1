@@ -1,0 +1,24 @@
+{% extends 'crawler/base.html' %}
+
+{% block content %}
+<div class="container card" id="rating-analysis">
+    <h3>Rating Analyser</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <div>
+        <b>{{ user_1 }}</b>
+        <pre>min_change = {{ min_1 }}</pre>
+        <pre>max_change = {{ max_1 }}</pre>
+        <pre>avg_change = {{ avg_1 }}</pre>
+
+        <b>{{ user_2 }}</b>
+        <pre>min_change = {{ min_2 }}</pre>
+        <pre>max_change = {{ max_2 }}</pre>
+        <pre>avg_change = {{ avg_2 }}</pre>
+    </div>
+</div>
+{% endblock %}

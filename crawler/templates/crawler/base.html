@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crawler Website</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <style>
+            .light-grey
+            {
+                background-color : f1f1f1;
+            }
+            .navigation-bar
+            {
+                position :sticky;
+            }
+            .card
+            {
+                border: 1px solid white;
+                border-radius: 5px;
+                margin: 40px auto;
+                padding: 20px;
+            }
+            .footer
+            {
+                position: fixed;
+                padding: 20px;
+                bottom: 0;
+                right: 0;
+            }
+
+        </style>
+    </head>
+    <body class="light-grey">
+        <div class="container-fluid navigation-bar" id="navigation-bar">
+            <nav class="container-fluid navbar navbar-expand-md bg-dark navbar-dark">
+                <a class="navbar-brand" href="#">CODEFORCES</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsible-navbar">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'code_searcher' %}">Code Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'rating_analyser' %}">Analyse Rating</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'questions_and_attempts' %}">Attempts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'average_gap' %}">Contest Gap</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'contest_comparator' %}">Compare Contest</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+    <footer class="footer">
+        <div class="container">
+            <b>Created by</b> : Pooja Bhagat and Kartikeya Saxena<br>
+            <b>Contact information:</b> <a href="https://www.facebook.com/kartikeya.saxena.37">Kartikeya Saxena</a> | <a href="https://www.facebook.com/Pooja.bhagat20">Pooja Bhagat</a>
+        </div>
+    </footer>
+</html>
