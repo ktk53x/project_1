@@ -1,24 +1,32 @@
 {% extends 'crawler/base.html' %}
 
 {% block content %}
-<div class="container card" id="rating-analysis">
-    <h3>Rating Analyser</h3>
+<div class="card" id="rating-analysis">
+    <div class="page-header">
+    <h2>Rating Analyser</h2>
+    </div>
+    <br>
     <form method="post">
         {% csrf_token %}
         {{ form }}
-        <button type="submit">Submit</button>
+        <br>
+        <button type="submit" class="btn btn-outline-info btn-lg" data-toggle="collapse" data-target="#output" aria-expanded="false" aria-controls="output">Submit</button>
     </form>
     <br>
-    <div>
-        <b>{{ user_1 }}</b>
-        <pre>min_change = {{ min_1 }}</pre>
-        <pre>max_change = {{ max_1 }}</pre>
-        <pre>avg_change = {{ avg_1 }}</pre>
-
+    <div class="collapse" id="output">
+        <b>{{ user_1 }} (Current Status)</b>
+        <pre>Maximum Rating</pre>
+        <pre>Minimum Rating</pre>
+        <pre>Minimum Change = {{ min_1 }}</pre>
+        <pre>Maximum Change = {{ max_1 }}</pre>
+        <pre>Average Change = {{ avg_1 }}</pre>
+        
+        <!--
         <b>{{ user_2 }}</b>
         <pre>min_change = {{ min_2 }}</pre>
         <pre>max_change = {{ max_2 }}</pre>
         <pre>avg_change = {{ avg_2 }}</pre>
+        -->
     </div>
 </div>
 {% endblock %}

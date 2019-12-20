@@ -2,12 +2,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Crawler Website</title>
+        <title>CodeForces Crawler </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
         <style>
             .light-grey
             {
@@ -15,56 +14,133 @@
             }
             .navigation-bar
             {
-                position :sticky;
+                position : fixed;
             }
             .card
             {
-                border: 1px solid white;
-                border-radius: 5px;
-                margin: 40px auto;
-                padding: 20px;
+                border: 2px solid white;
+                border-radius: 10px;
+                background-color: rgba(9, 75, 80,.125);
+                padding: 20px 40px;
+                margin:2% auto 4% auto;
+                height: 80%;
+                width:84%;
             }
-            .footer
+            .page-header
+            {
+                border-bottom: rgba(44, 61, 87, 0.705) 1px solid;
+                padding: 10px;
+            }
+            footer
             {
                 position: fixed;
                 padding: 20px;
-                bottom: 0;
-                right: 0;
+                bottom: 2%;
+                right: 5%;
+            }
+            .nav-item
+            {
+                font-size: large;
+                height:200%;
+                margin: 5px;
+            }
+            .navbar-brand
+            {
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 35px;
+            }
+            html, body
+            {
+                margin:0;
+                height: 100%;
+            }
+            body
+            {
+                background-color:white;
+                background-repeat:  no-repeat;
+                background-size: cover;
+                color: black;
+                height: 90%;
+                width:100%;
+            }
+            .content
+            {
+                margin: 2% 5% 0% 5%;
+            }
+            .navbar{
+                border-bottom: 2px solid blue;
+            }
+            .nav-item
+            {
+                font-size: 22px;
+            }
+            #output
+            {
+                border-radius: 5px;
+                border:rgba(44, 61, 87, 0.705) 2px solid;
+                padding: 10px;
+                background-color: rgba(9, 75, 80,.15);
+                overflow: auto;
+            }
+            ::-webkit-scrollbar 
+            {
+                width: 10px;
             }
 
+            ::-webkit-scrollbar-track 
+            {
+                background: #f1f1f1; 
+            }
+ 
+            ::-webkit-scrollbar-thumb 
+            {
+                background: rgba(44, 61, 87, 0.5); 
+                border-radius:3px;
+            }   
+            ::-webkit-scrollbar-thumb:hover 
+            {
+                background: #555; 
+            }
         </style>
     </head>
     <body class="light-grey">
-        <div class="container-fluid navigation-bar" id="navigation-bar">
-            <nav class="container-fluid navbar navbar-expand-md bg-dark navbar-dark">
-                <a class="navbar-brand" href="#">CODEFORCES</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-navbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsible-navbar">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'index' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'code_searcher' %}">Code Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'rating_analyser' %}">Analyse Rating</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'questions_and_attempts' %}">Attempts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'average_gap' %}">Contest Gap</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-dark nav-link bg-dark" href="{% url 'contest_comparator' %}">Compare Contest</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="content">
+            <nav class="navbar navbar-light">
+                <a class="navbar-brand" href="#">Codeforces Crawler</a>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">
+                            Home    
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'code_searcher' %}">
+                            Get Code
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'rating_analyser' %}">
+                            Analyse Rating 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'questions_and_attempts' %}">
+                            Attempts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'average_gap' %}">
+                            Contest Gap
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contest_comparator' %}">
+                            Compare Performance
+                        </a>
+                    </li>
+                </ul>
             </nav>
-        </div>
+            </div>
         {% block content %}
         {% endblock %}
     </body>
