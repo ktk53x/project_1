@@ -1,37 +1,30 @@
-from bs4 import BeautifulSoup
+from bs4 import *
 import requests
 import re
 from datetime import date
+import datetime
+import json
 
 
 def crawler_1(user, contest_code, question_code):
-    codeforces = 'http://codeforces.com/'
-    submissions = 'submissions/'
-    problem = 'problem/'
-    submissions_page = requests.get(codeforces + submissions + user + "/page/1").text
-    soup = BeautifulSoup(submissions_page, 'lxml')
-    page_list = soup.find_all("span", class_="page-index")
-    page_list = page_list[len(page_list) - 1].find("a").contents
-    pages = int(page_list[0])
-    for page_index in range(1, pages+1):
-        submissions_page = requests.get(codeforces + submissions + user + "/page/" + str(page_index)).text
-        soup = BeautifulSoup(submissions_page, 'lxml')
-        submissions_table = soup.find_all("table", class_="status-frame-datatable")
-        for table_row in submissions_table[0].find_all("tr"):
-            if (table_row.a != None):
-                question_match = table_row.find_all("td")[3].a.get("href")
-                link = table_row.find_all("a")[0].get("href")
-                verdict = table_row.find("span", class_="verdict-accepted")
-                if(verdict != None):
-                    question = "/contest/" + contest_code + '/' + problem + question_code
-                    if (re.match(question_match, question)):
-                        code_html = codeforces + link
-                        code_page = requests.get(code_html).text
-                        soup_code = BeautifulSoup(code_page, 'lxml')
-                        return soup_code.find("pre", id="program-source-text").stripped_strings
+
+    u =  'https://codeforces.com/api/contest.status?contestId='+contest_code+'&handle='+user
+
+    r = requests.get(u)
+
+    data = r.json()
+    data = data['result']
+
+    for submission in data:
+        if submission['problem']['index']==question_code and submission['verdict']=='OK':
+            u = 'https://codeforces.com/contest/'+contest_code+'/submission/'+str(submission['id'])
+            code_page = requests.get(u).text
+            soup_code = BeautifulSoup(code_page, 'lxml')
+            return soup_code.find("pre", id="program-source-text").stripped_strings
+    
 
 
-def crawler_2(user_1, user_2):
+def crawler_2(user):
     codeforces = 'http://codeforces.com/'
     contests = 'contests/with/'
     user_1_page = requests.get(codeforces + contests + user_1).text
@@ -78,7 +71,13 @@ def crawler_2(user_1, user_2):
         avg_change_2 += rating
     avg_change_2 /= len(rating_changes_2)
     return (max_change_1, min_change_1, avg_change_1, max_change_2, min_change_2, avg_change_2)
-
+    """
+    u = "https://codeforces.com/api/user.info?handles="+user
+    r = requests.get(u)
+    data = r.json()
+    data = data['result'][0]
+    return(data)
+    """
 
 def crawler_3(user):
     codeforces = 'http://codeforces.com/'
@@ -104,9 +103,8 @@ def crawler_3(user):
                         attempts[problem] += 1
     return attempts
 
-
 def crawler_4(user):
-    codeforces = 'http://www.codeforces.com/'
+    codeforces = 'https://www.codeforces.com/'
     contests = 'contests/'
     user_page = requests.get(codeforces + contests + 'with/' + user).text
     soup = BeautifulSoup(user_page, 'lxml')
@@ -143,7 +141,7 @@ def crawler_4(user):
 
 
 def crawler_5(user1, user2, contest_code):
-    codeforces = 'http://codeforces.com/'
+    codeforces = 'https://www.codeforces.com/'
     contest_page = requests.get(codeforces + 'contest/' + contest_code).text
     soup = BeautifulSoup(contest_page, 'lxml')
     problems_table = soup.find("table", class_="problems")
@@ -161,10 +159,11 @@ def crawler_5(user1, user2, contest_code):
             problems[code]['time1'] = 0
             problems[code]['time2'] = 0
     contest_page1 = requests.get(codeforces + 'submissions/' + user1 + '/contest/' + contest_code).text
+    #contest_page1=requests.get('https://codeforces.com/submissions/sparsh2706/contest/1287').text
     contest_page2 = requests.get(codeforces + 'submissions/' + user2 + '/contest/' + contest_code).text
     soup1 = BeautifulSoup(contest_page1, 'lxml')
     soup2 = BeautifulSoup(contest_page2, 'lxml')
-    contests_table1 = soup1.find("table", class_="status-frame-datatable")
+    contests_table1 = soup1.find("table" , class_="status-frame-datatable")
     contests_table2 = soup2.find("table", class_="status-frame-datatable")
     for table_row in contests_table1.find_all("tr"):
         table_data = table_row.find_all("td")
@@ -187,3 +186,33 @@ def crawler_5(user1, user2, contest_code):
         print(user1, problems[A]['attempts1'], problems[A]['success1'], problems[A]['time1'])
         print(user2, problems[A]['attempts2'], problems[A]['success2'], problems[A]['time2'])
     return problems
+   
+def generate_heat_map(user):
+    cf_api = requests.get('https://codeforces.com/api/user.status?handle=' + user)
+
+    sub_json = cf_api.json()
+
+    submissions = {}
+    ref = datetime.date(2019, 1, 1)
+    for t in sub_json["result"]:
+        x = datetime.datetime.fromtimestamp(t["creationTimeSeconds"]).date()
+        x = (x - ref).days
+        if submissions.get(x) is None:
+            submissions[x] = 1
+        else:
+            submissions[x] = submissions[x] + 1
+    return submissions
+
+def generate_pie_chart(user):
+    cf_api = requests.get('https://codeforces.com/api/user.status?handle=' + user)
+    sub_json = cf_api.json()
+    tags = {}
+    for keys in sub_json["result"]:
+        for tag in keys["problem"]["tags"]:
+            if tags.get(tag) is None:
+                tags[tag] = 1
+            else:
+                tags[tag] += 1
+    return tags
+
+print(crawler_3('seabreeze'))

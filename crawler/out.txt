@@ -1,0 +1,22 @@
+A Nauuo and Votes
+seabreeze 1 1 Jun/07/2019 15:10
+ktk54x 1 1 Jun/07/2019 15:16
+B Nauuo and Chess
+seabreeze 1 1 Jun/07/2019 15:19
+ktk54x 1 1 Jun/07/2019 15:37
+C Nauuo and Cards
+seabreeze 2 1 Jun/07/2019 16:15
+ktk54x 0 0 0
+D Nauuo and Circle
+seabreeze 1 0 0
+ktk54x 0 0 0
+E1 Nauuo and Pictures (easy version)
+seabreeze 0 0 0
+ktk54x 0 0 0
+E2 Nauuo and Pictures (hard version)
+seabreeze 0 0 0
+ktk54x 0 0 0
+F Nauuo and Portals
+seabreeze 0 0 0
+ktk54x 0 0 0
+{'A': {'name': 'Nauuo and Votes', 'attempts1': 1, 'attempts2': 1, 'success1': 1, 'success2': 1, 'time1': 'Jun/07/2019 15:10', 'time2': 'Jun/07/2019 15:16'}, 'B': {'name': 'Nauuo and Chess', 'attempts1': 1, 'attempts2': 1, 'success1': 1, 'success2': 1, 'time1': 'Jun/07/2019 15:19', 'time2': 'Jun/07/2019 15:37'}, 'C': {'name': 'Nauuo and Cards', 'attempts1': 2, 'attempts2': 0, 'success1': 1, 'success2': 0, 'time1': 'Jun/07/2019 16:15', 'time2': 0}, 'D': {'name': 'Nauuo and Circle', 'attempts1': 1, 'attempts2': 0, 'success1': 0, 'success2': 0, 'time1': 0, 'time2': 0}, 'E1': {'name': 'Nauuo and Pictures (easy version)', 'attempts1': 0, 'attempts2': 0, 'success1': 0, 'success2': 0, 'time1': 0, 'time2': 0}, 'E2': {'name': 'Nauuo and Pictures (hard version)', 'attempts1': 0, 'attempts2': 0, 'success1': 0, 'success2': 0, 'time1': 0, 'time2': 0}, 'F': {'name': 'Nauuo and Portals', 'attempts1': 0, 'attempts2': 0, 'success1': 0, 'success2': 0, 'time1': 0, 'time2': 0}}

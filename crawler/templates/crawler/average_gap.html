@@ -17,4 +17,59 @@
         <pre><b>gap</b> = {{ gap }} days</pre>
     </div>
 </div>
+<div>
+    <table width="1060" id="js-datatable" border="3">
+        <tbody>
+          {% for row  in grid %}
+            <tr id="r{{ forloop.counter }}">
+              {% for column in row %}
+                <td width="10" id="c{{ forloop.counter }}">{{ column }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      <div id="piechart"></div>
+      
+      <script type='text/javascript'>
+        $("button").click(function(){
+          for(var i = 1; i <= 7; i++){
+              var x = "#r" + i.toString();
+              console.log(x)
+              $(x).children().each(function(){
+                $(this).css({"background-color": "blue", opacity: (parseInt($(this).text()) / 15).toString()});
+                $(this).text(".");
+              });
+          }
+        });
+      </script>
+      
+      
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      
+      <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+         ['tag', 'no of submissions'],
+         {% for k, v in pie.items %}
+          ['{{ k }}', {{ v }}],
+         {% endfor %}
+        ]);
+      
+        var options = {
+                title: 'tags',
+                pieHole: 0.4,
+                is3D: true,
+                'width': 550,
+                'height': 400
+              };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      </script>
+</div>
 {% endblock %}

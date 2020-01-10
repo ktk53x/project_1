@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>CodeForces Crawler </title>
+        <title>CodeHaven </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -22,9 +22,10 @@
                 border-radius: 10px;
                 background-color: rgba(9, 75, 80,.125);
                 padding: 20px 40px;
-                margin:2% auto 4% auto;
-                height: 80%;
-                width:84%;
+                margin:1% auto 1% auto;
+                height: 85%;
+                width:85%;
+                bottom: 0%;
             }
             .page-header
             {
@@ -35,14 +36,16 @@
             {
                 position: fixed;
                 padding: 20px;
-                bottom: 2%;
-                right: 5%;
+                bottom: 0;
+                right: 0;
+                height: 10%;
             }
             .nav-item
             {
                 font-size: large;
                 height:200%;
                 margin: 5px;
+                float: right;
             }
             .navbar-brand
             {
@@ -65,7 +68,7 @@
             }
             .content
             {
-                margin: 2% 5% 0% 5%;
+                margin: auto;
             }
             .navbar{
                 border-bottom: 2px solid blue;
@@ -89,7 +92,7 @@
 
             ::-webkit-scrollbar-track 
             {
-                background: #f1f1f1; 
+                background: rgba(44, 61, 87, 0.0); 
             }
  
             ::-webkit-scrollbar-thumb 
@@ -101,15 +104,46 @@
             {
                 background: #555; 
             }
+            li{
+                display:block;
+            }
+            #navbarNavSmall
+            {
+                position: absolute;
+                right:0%;
+                top:100%;
+                background-color: white;
+                border: 1px solid blue;
+                z-index:5;
+            }
+            .Navsmall .v-item
+            {
+                margin:5%;
+                border-bottom: 1px solid blue;
+                padding-bottom: 2%;
+                color: snow;
+            }
+            .Navsmall .v-item .nav-link
+            {
+                color: rgb(0, 0, 0);
+            }
+            table
+            {
+                table-layout: fixed;
+            }
         </style>
     </head>
     <body class="light-grey">
-        <div class="content">
-            <nav class="navbar navbar-light">
-                <a class="navbar-brand" href="#">Codeforces Crawler</a>
-                <ul class="nav justify-content-end">
+        <div class="content" style="z-index: 5;">
+            <nav class="navbar navbar-fixed-top navbar-light navbar-expand-lg">
+                <a class="navbar-brand" href="#">CodeHaven</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavSmall" aria-controls="navbarNavSmall" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav" style="position: absolute; right :  0px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">
+                        <a class="nav-link" href="{% url 'index' %}" >
                             Home    
                         </a>
                     </li>
@@ -120,7 +154,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'rating_analyser' %}">
-                            Analyse Rating 
+                            Profile Analysis 
                         </a>
                     </li>
                     <li class="nav-item">
@@ -128,19 +162,59 @@
                             Attempts
                         </a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'average_gap' %}">
                             Contest Gap
                         </a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contest_comparator' %}">
                             Compare Performance
                         </a>
                     </li>
                 </ul>
+                </div>
+            <div class="collapse navbar-toggler" id="navbarNavSmall">
+                <ul class="Navsmall" style="padding-left: 0%;">
+                    <li class="v-item" style="display: block;">
+                        <a class="nav-link" href="{% url 'index' %}" >
+                            Home   <br> 
+                        </a>
+                    </li>
+                    <li class="v-item" style="display: block;">
+                        <a class="nav-link" href="{% url 'code_searcher' %}">
+                            Get Code <br>
+                        </a>
+                    </li>
+                    <li class="v-item">
+                        <a class="nav-link" href="{% url 'rating_analyser' %}">
+                            Profile Analysis <br>
+                        </a>
+                    </li>
+                    <li class="v-item">
+                        <a class="nav-link" href="{% url 'questions_and_attempts' %}">
+                            Attempts <br>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'average_gap' %}">
+                            Contest Gap
+                        </a>
+                    </li>
+                    -->
+                    <li class="v-item">
+                        <a class="nav-link" href="{% url 'contest_comparator' %}">
+                            Compare Performance
+                        </a>
+                    </li>
+                </ul> 
+            </div>
             </nav>
             </div>
+            
         {% block content %}
         {% endblock %}
     </body>

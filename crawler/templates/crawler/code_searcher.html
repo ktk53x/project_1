@@ -1,5 +1,7 @@
 {% extends 'crawler/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div class="card" id="code-search">
     <div class="page-header">
@@ -8,12 +10,51 @@
     <br>
     <form method="post">
         {% csrf_token %}
-        {{ form }}
+        <!--{{ form }}
+        <button type="submit" class="btn btn-outline-info btn-lg" >Submit</button>
+    </form>-->
+        {{ form.non_field_errors }}
+        <table  colspan="4">
+        <td>
+        <table border="0" style="width: 100%;">
+        <tr>
+            <td colspan="4">
+            <div class="fieldWrapper">
+            {{ form.user.errors }}
+            <label for="{{ form.user.id_for_label }}">Handle</label>
+            <br>
+                <input type="text" class="form-control" name="user" maxlength="100" required id="{{ form.user.id_for_label }}">
+            </div>
+            </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+        <div class="fieldWrapper">
+            {{ form.contest_code.errors }}
+            <label for="{{ form.contest_code.id_for_label }}">Contest Code</label>
+            <br>
+            <input type="number" class="form-control" name="contest_code" maxlength="100" required id="{{ form.contest_code.id_for_label }}">
+        </div>
+        </td>
+        <td colspan="2">
+        <div class="fieldWrapper">
+            {{ form.question_code.errors }}
+            <label for="{{ form.question_code.id_for_label }}">Question Code</label>
+            <br>
+            <input type="text" class="form-control" name="question_code" maxlength="100" required id="{{ form.question_code.id_for_label }}">
+        </div>
+        </td>
+        </tr>
+        </table>
+        </td>
+        <td colspan="1">
+            <button type="submit" class="btn btn-outline-info btn-lg" >Submit</button>
+        </td>
+        </table>
     </br>
-        <button type="submit" class="btn btn-outline-info btn-lg" data-toggle="collapse" data-target="#output" aria-expanded="false" aria-controls="output">Submit</button>
     </form>
     <br>
-    <div class="collapse" id="output">
+    <div id="output">
         <code>
         {% for strings in code_text %}
             <pre>{{ strings }}</pre>

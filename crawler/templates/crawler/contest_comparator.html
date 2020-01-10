@@ -8,12 +8,45 @@
     <br>
     <form method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form.non_field_errors }}
+        <table border="0" style="width: 100%;">
+        <tr>
+            <td colspan="4">
+            <div class="fieldWrapper">
+            {{ form.user_1.errors }}
+            <label for="{{ form.user_1.id_for_label }}">Handle 1</label>
+            <br>
+            <input type="text" class="form-control" name='user_1' maxlength="100" required id=" {{ form.user_1.id_for_label }} ">
+            </div>
+            </td>
+            <td colspan="4">
+                    {{ form.user_2.errors }}
+                    <label for="{{ form.user_2.id_for_label }}">Handle 2</label>
+                    <br>
+                    <input type="text" class="form-control" name='user_2' maxlength="100" required id=" {{ form.user_2.id_for_label }} ">
+                </td>
+        </tr>
+        <tr>
+        <td colspan="4">
+        <div class="fieldWrapper">
+            {{ form.contest_code.errors }}
+            <label for="{{ form.contest_code.id_for_label }}">Contest Code</label>
+            <br>
+            <input type="text" class="form-control" name="contest_code" maxlength="100" required id="{{ form.contest_code.id_for_label }}">
+        </div>
+        </td>
+        <td colspan="4">
+        <div class="fieldWrapper">
+            <button type="submit" class="btn btn-outline-info btn-lg" >Submit</button>
+        </div>
+        </td>
+        </tr>
+        </table>
     </br>
-        <button type="submit" class="btn btn-outline-info btn-lg" data-toggle="collapse" data-target="#output" aria-expanded="false" aria-controls="output">Submit</button>
+        
     </form>
     <br>
-    <div class="collapse" id="output">
+    <div class="" id="output">
         {{ problems }}
     </div>
 </div>
